@@ -20,6 +20,10 @@ public class PersonModel {
         this.addressModel = addressModel;
     }
 
+    public PersonModel() {
+
+    }
+
     public int getId() {
         return id;
     }
