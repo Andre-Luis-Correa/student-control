@@ -1,8 +1,10 @@
 package dao;
 
 import connections.DatabaseConnection;
+import exceptions.DeleteSqlException;
 import exceptions.InsertSqlException;
 import exceptions.SelectSqlException;
+import exceptions.UpdateSqlException;
 import model.AlunoModel;
 
 import java.sql.Connection;
@@ -81,6 +83,39 @@ public class AlunoDAO {
             throw new SelectSqlException("Erro ao realizar select na tabela aluno", e);
         }
         return alunoModels;
+    }
+
+    public void update(AlunoModel alunoModel) throws UpdateSqlException {
+        String query = "UPDATE aluno SET nomeAluno = ?, cpfAluno = ?, telefoneAluno = ?, emailAluno = ?, enderecoAluno = ? WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, alunoModel.getNomeAluno());
+            stmt.setString(2, alunoModel.getCpfAluno());
+            stmt.setString(3, alunoModel.getTelefoneAluno());
+            stmt.setString(4, alunoModel.getEmailAluno());
+            stmt.setString(5, alunoModel.getEnderecoAluno());
+            stmt.setInt(6, alunoModel.getIdAluno());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new UpdateSqlException("Erro ao atualizar a tabela aluno", e);
+        }
+    }
+
+    public void delete(int id) throws DeleteSqlException {
+        String query = "DELETE FROM aluno WHERE id = ?";
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DeleteSqlException("Erro ao deletar da tabela aluno", e);
+        }
     }
 
 }
