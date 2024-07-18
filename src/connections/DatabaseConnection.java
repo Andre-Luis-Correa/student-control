@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     //Colocar o nome do banco de dados que você criou
-    private static final String URL = "jdbc:mysql://localhost:3306/studentControl";
+    private static final String URL = "jdbc:mysql://localhost:3306/controle_estudantes";
     //Colocar o usuario que loga no MySQL Workbench
     private static final String USER = "root";
     //Colocar a senha que loga no MySQL Workbench

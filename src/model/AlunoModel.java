@@ -7,17 +7,18 @@ public class AlunoModel {
     private String cpfAluno;
     private String telefoneAluno;
     private String emailAluno;
-    private String enderecoAluno;
+    private EnderecoModel enderecoModel;
 
-    public AlunoModel() {}
+    public AlunoModel() {
+    }
 
-    public AlunoModel(int idAluno, String nomeAluno, String cpfAluno, String telefoneAluno, String emailAluno, String enderecoAluno) {
+    public AlunoModel(int idAluno, String nomeAluno, String cpfAluno, String telefoneAluno, String emailAluno, EnderecoModel enderecoModel) {
         this.idAluno = idAluno;
         this.nomeAluno = nomeAluno;
         this.cpfAluno = cpfAluno;
         this.telefoneAluno = telefoneAluno;
         this.emailAluno = emailAluno;
-        this.enderecoAluno = enderecoAluno;
+        this.enderecoModel = enderecoModel;
     }
 
     public int getIdAluno() {
@@ -60,23 +61,23 @@ public class AlunoModel {
         this.emailAluno = emailAluno;
     }
 
-    public String getEnderecoAluno() {
-        return enderecoAluno;
+    public EnderecoModel getEnderecoModel() {
+        return enderecoModel;
     }
 
-    public void setEnderecoAluno(String enderecoAluno) {
-        this.enderecoAluno = enderecoAluno;
+    public void setEnderecoModel(EnderecoModel enderecoModel) {
+        this.enderecoModel = enderecoModel;
     }
 
     @Override
     public String toString() {
         return "AlunoModel{" +
-                "idAluno='" + idAluno + '\'' +
+                "idAluno=" + idAluno +
                 ", nomeAluno='" + nomeAluno + '\'' +
                 ", cpfAluno='" + cpfAluno + '\'' +
                 ", telefoneAluno='" + telefoneAluno + '\'' +
                 ", emailAluno='" + emailAluno + '\'' +
-                ", enderecoAluno='" + enderecoAluno + '\'' +
+                ", enderecoModel=" + enderecoModel +
                 '}';
     }
 }

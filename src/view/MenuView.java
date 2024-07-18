@@ -1,5 +1,7 @@
 package view;
 
+import exceptions.SelectSqlException;
+
 import java.util.Scanner;
 
 public class MenuView {
@@ -14,45 +16,29 @@ public class MenuView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void showMenu() {
+    public void showMenu() throws SelectSqlException {
         boolean running = true;
 
         while (running) {
             System.out.println("\nMenu:");
-            System.out.println("1. Criar Aluno");
-            System.out.println("2. Exibir Aluno");
-            System.out.println("3. Criar Professor");
-            System.out.println("4. Exibir Professor");
-            System.out.println("5. Sair");
+            System.out.println("1. Cadastrar aluno");
+            System.out.println("2. Matricular aluno");
+            System.out.println("3. Exibir matricula de aluno");
+            System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
 
-            int choice = scanner.nextInt();
+            int opcao = scanner.nextInt();
             scanner.nextLine(); // Consumes the newline character
 
-            switch (choice) {
+            switch (opcao) {
                 case 1:
-                    System.out.println("Criando um novo aluno:");
-                    alunoView.createAluno();
+                    alunoView.cadastrarAluno();
                     break;
                 case 2:
-                    System.out.print("Digite o ID do aluno: ");
-                    int alunoId = scanner.nextInt();
-                    scanner.nextLine(); // Consumes the newline character
-                    System.out.println("Exibindo aluno:");
-                    alunoView.showAluno(alunoId);
                     break;
                 case 3:
-                    System.out.println("Criando um novo professor:");
-                    professorView.createProfessor();
                     break;
                 case 4:
-                    System.out.print("Digite o ID do professor: ");
-                    int professorId = scanner.nextInt();
-                    scanner.nextLine(); // Consumes the newline character
-                    System.out.println("Exibindo professor:");
-                    professorView.showProfessor(professorId);
-                    break;
-                case 5:
                     running = false;
                     System.out.println("Saindo...");
                     break;
