@@ -23,7 +23,4 @@ public class AlunoController {
     public AlunoModel buscarPorCpf(String cpfAluno) throws SelectSqlException {
         return alunoDAO.selectByCpf(cpfAluno);
     }
-
-    public void matricularAluno(AlunoModel alunoModel) {
-    }
 }

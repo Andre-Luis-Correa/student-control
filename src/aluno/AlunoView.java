@@ -41,22 +41,6 @@ public class AlunoView {
         }
     }
 
-    public void matricularAluno() throws SelectSqlException {
-        System.out.println("Matricular aluno: \n");
-
-        System.out.print("Digite o CPF do aluno: ");
-        String cpfAluno = scanner.nextLine();
-        AlunoModel alunoModel = alunoController.buscarPorCpf(cpfAluno);
-
-        if (alunoModel != null) {
-            alunoController.matricularAluno(alunoModel);
-            System.out.println("Aluno matriculado com sucesso!");
-        } else {
-            System.out.println("Cadastro de aluno não encontrado com esse CPF, realize o cadastro no menu principal");
-        }
-
-    }
-
     private AlunoModel lerAluno() {
         AlunoModel alunoModel = new AlunoModel();
 

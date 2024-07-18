@@ -2,6 +2,7 @@ package menu;
 
 import aluno.AlunoView;
 import exceptions.SelectSqlException;
+import matriculaaluno.MatriculaAlunoView;
 import professor.ProfessorView;
 
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class MenuView {
 
     private AlunoView alunoView;
+    private MatriculaAlunoView matriculaAlunoView;
     private ProfessorView professorView;
     private Scanner scanner;
 
@@ -37,7 +39,7 @@ public class MenuView {
                     alunoView.cadastrarAluno();
                     break;
                 case 2:
-                    alunoView.matricularAluno();
+                    matriculaAlunoView.matricularAluno();
                 case 3:
                     break;
                 case 4:
