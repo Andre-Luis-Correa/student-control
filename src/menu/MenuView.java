@@ -29,9 +29,7 @@ public class MenuView {
             System.out.println("1. Cadastrar aluno");
             System.out.println("2. Matricular aluno");
             System.out.println("3. Exibir matrícula de aluno");
-            System.out.println("4. Listar professores");
-            System.out.println("5. Listar informações do aluno");
-            System.out.println("6. Sair");
+            System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
 
             int opcao = scanner.nextInt();
@@ -49,12 +47,6 @@ public class MenuView {
                         matriculaAlunoView.exibirMatriculaAluno();
                         break;
                     case 4:
-                        professorView.listarProfessores();
-                        break;
-                    case 5:
-                        alunoView.listarInformacoesAluno();
-                        break;
-                    case 6:
                         running = false;
                         System.out.println("Saindo...");
                         break;

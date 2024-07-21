@@ -78,7 +78,7 @@ public class MatriculaAlunoView {
                 return;
             }
 
-            System.out.println("Disciplinas disponíveis no ano letivo " + anoLetivoAtual + ":");
+            System.out.println("\nDisciplinas disponíveis no ano letivo " + anoLetivoAtual + ":");
             for (DisciplinaModel disciplina : disciplinasDisponiveis) {
                 System.out.println(disciplina.getIdDisciplina() + ": " + disciplina.getNomeDisciplina());
 
@@ -93,7 +93,7 @@ public class MatriculaAlunoView {
                 }
             }
 
-            System.out.print("Digite os IDs das disciplinas separadas por vírgula: ");
+            System.out.print("\nDigite os IDs das disciplinas separadas por vírgula: ");
             String[] idsDisciplinas = scanner.nextLine().split(",");
             List<Integer> disciplinas = new ArrayList<>();
             for (String idDisciplina : idsDisciplinas) {
@@ -112,7 +112,7 @@ public class MatriculaAlunoView {
     }
 
     public void exibirMatriculaAluno() {
-        System.out.println("Exibir matrícula de aluno: \n");
+        System.out.println("\nExibir matrícula de aluno: \n");
 
         System.out.print("Digite o CPF do aluno: ");
         String cpfAluno = scanner.nextLine();
