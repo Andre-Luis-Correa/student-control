@@ -1,5 +1,8 @@
 package professor;
 
+import exceptions.SelectSqlException;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class ProfessorView {
@@ -12,29 +15,23 @@ public class ProfessorView {
         this.scanner = new Scanner(System.in);
     }
 
-    public void createProfessor() {
-        ProfessorModel professor = new ProfessorModel();
-
-        System.out.print("Nome do Professor: ");
-        professor.setNomeProfessor(scanner.nextLine());
-
-        System.out.print("Email do Professor: ");
-        professor.setEmailProfessor(scanner.nextLine());
-
-        System.out.print("Endereço do Professor: ");
-        professor.setEnderecoProfessor(scanner.nextLine());
-
-        professorController.addProfessor(professor);
-    }
-
-    public void showProfessor(int id) {
-        ProfessorModel professor = professorController.getProfessor(id);
-        if (professor != null) {
-            System.out.println(professor);
-        } else {
-            System.out.println("Professor não encontrado!");
+    public void listarProfessores() {
+        try {
+            List<ProfessorModel> professores = professorController.listarTodos();
+            if (professores.isEmpty()) {
+                System.out.println("Nenhum professor cadastrado.");
+            } else {
+                System.out.println("Lista de Professores:");
+                for (ProfessorModel professor : professores) {
+                    System.out.println("ID: " + professor.getIdProfessor());
+                    System.out.println("Nome: " + professor.getNomeProfessor());
+                    System.out.println("Email: " + professor.getEmailProfessor());
+                    System.out.println("Endereço: " + professor.getEnderecoProfessor());
+                    System.out.println("-----------------------------");
+                }
+            }
+        } catch (SelectSqlException e) {
+            System.out.println("Erro ao listar professores: " + e.getMessage());
         }
     }
-
-    // Outros métodos para interação com o usuário
 }

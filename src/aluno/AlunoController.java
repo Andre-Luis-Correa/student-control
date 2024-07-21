@@ -14,7 +14,7 @@ public class AlunoController {
         this.enderecoController = new EnderecoController();
     }
 
-    public void cadastrarAluno(AlunoModel aluno) throws InsertSqlException {
+    public void cadastrarAluno(AlunoModel aluno) throws InsertSqlException, SelectSqlException {
         int idEndereco = enderecoController.cadastrarEndereco(aluno.getEnderecoModel());
         aluno.getEnderecoModel().setIdEndereco(idEndereco);
         alunoDAO.insert(aluno);

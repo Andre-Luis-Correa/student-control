@@ -6,6 +6,7 @@ import logradouro.LogradouroController;
 import tipologradouro.TipoLogradouroController;
 import unidadefederacao.UnidadeFederacaoController;
 import exceptions.InsertSqlException;
+import exceptions.SelectSqlException;
 
 public class EnderecoController {
     private EnderecoDAO enderecoDAO;
@@ -24,7 +25,7 @@ public class EnderecoController {
         this.logradouroController = new LogradouroController();
     }
 
-    public int cadastrarEndereco(EnderecoModel endereco) throws InsertSqlException {
+    public int cadastrarEndereco(EnderecoModel endereco) throws InsertSqlException, SelectSqlException {
         // Inserir Unidade Federativa
         String siglaUF = unidadeFederacaoController.cadastrarUnidadeFederacao(endereco.getCidadeModel().getUnidadeFederacaoModel());
         endereco.getCidadeModel().getUnidadeFederacaoModel().setSiglaUF(siglaUF);

@@ -2,9 +2,9 @@ package aluno;
 
 import connections.DatabaseConnection;
 import endereco.EnderecoDAO;
+import endereco.EnderecoModel;
 import exceptions.InsertSqlException;
 import exceptions.SelectSqlException;
-import endereco.EnderecoModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,6 +45,35 @@ public class AlunoDAO {
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, cpfAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    alunoModel = new AlunoModel();
+                    alunoModel.setIdAluno(rs.getInt("idAluno"));
+                    alunoModel.setNomeAluno(rs.getString("nomeAluno"));
+                    alunoModel.setCpfAluno(rs.getString("cpfAluno"));
+                    alunoModel.setTelefoneAluno(rs.getString("telefoneAluno"));
+                    alunoModel.setEmailAluno(rs.getString("emailAluno"));
+
+                    int idEndereco = rs.getInt("idEndereco");
+                    EnderecoModel enderecoModel = enderecoDAO.selectById(idEndereco);
+                    alunoModel.setEnderecoModel(enderecoModel);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SelectSqlException("Erro ao realizar select na tabela aluno", e);
+        }
+        return alunoModel;
+    }
+
+    public AlunoModel selectById(int idAluno) throws SelectSqlException {
+        String query = "SELECT * FROM aluno WHERE idAluno = ?";
+        AlunoModel alunoModel = null;
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, idAluno);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {

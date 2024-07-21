@@ -1,14 +1,13 @@
 package anoletivo;
 
 public class AnoLetivoModel {
-
     private int idAnoLetivo;
-    private String anoLetivo;
+    private int anoLetivo;
 
     public AnoLetivoModel() {
     }
 
-    public AnoLetivoModel(int idAnoLetivo, String anoLetivo) {
+    public AnoLetivoModel(int idAnoLetivo, int anoLetivo) {
         this.idAnoLetivo = idAnoLetivo;
         this.anoLetivo = anoLetivo;
     }
@@ -21,11 +20,11 @@ public class AnoLetivoModel {
         this.idAnoLetivo = idAnoLetivo;
     }
 
-    public String getAnoLetivo() {
+    public int getAnoLetivo() {
         return anoLetivo;
     }
 
-    public void setAnoLetivo(String anoLetivo) {
+    public void setAnoLetivo(int anoLetivo) {
         this.anoLetivo = anoLetivo;
     }
 
@@ -33,7 +32,7 @@ public class AnoLetivoModel {
     public String toString() {
         return "AnoLetivoModel{" +
                 "idAnoLetivo=" + idAnoLetivo +
-                ", anoLetivo='" + anoLetivo + '\'' +
+                ", anoLetivo=" + anoLetivo +
                 '}';
     }
 }

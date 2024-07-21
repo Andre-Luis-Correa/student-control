@@ -1,5 +1,10 @@
 package professor;
 
+import exceptions.InsertSqlException;
+import exceptions.SelectSqlException;
+
+import java.util.List;
+
 public class ProfessorController {
 
     private ProfessorDAO professorDAO;
@@ -8,21 +13,15 @@ public class ProfessorController {
         this.professorDAO = new ProfessorDAO();
     }
 
-    public void addProfessor(ProfessorModel professor) {
-        try {
-            professorDAO.insert(professor);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void cadastrarProfessor(ProfessorModel professor) throws InsertSqlException {
+        professorDAO.insert(professor);
     }
 
-    public ProfessorModel getProfessor(int id) {
-        try {
-            return professorDAO.select(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public ProfessorModel buscarPorId(int idProfessor) throws SelectSqlException {
+        return professorDAO.selectById(idProfessor);
     }
 
+    public List<ProfessorModel> listarTodos() throws SelectSqlException {
+        return professorDAO.selectAll();
+    }
 }
