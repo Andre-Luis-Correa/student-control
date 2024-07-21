@@ -46,7 +46,7 @@ public class MenuView {
                         matriculaAlunoView.matricularAluno();
                         break;
                     case 3:
-                        // Implementar exibição da matrícula de aluno
+                        matriculaAlunoView.exibirMatriculaAluno();
                         break;
                     case 4:
                         professorView.listarProfessores();

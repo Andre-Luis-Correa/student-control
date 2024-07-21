@@ -58,4 +58,8 @@ public class MatriculaAlunoController {
     public MatriculaAlunoModel buscarPorNroMatricula(int nroMatricula) throws SelectSqlException {
         return matriculaAlunoDAO.selectByNroMatricula(nroMatricula);
     }
+
+    public List<MatriculaAlunoModel> buscarMatriculasPorAluno(int idAluno) throws SelectSqlException {
+        return matriculaAlunoDAO.selectByAluno(idAluno);
+    }
 }

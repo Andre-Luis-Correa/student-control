@@ -160,6 +160,47 @@ public class MatriculaAlunoDAO {
         return disciplinas;
     }
 
+    public List<MatriculaAlunoModel> selectByAluno(int idAluno) throws SelectSqlException {
+        String query = "SELECT * FROM MatriculaAluno WHERE idAluno = ?";
+        List<MatriculaAlunoModel> matriculas = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, idAluno);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    MatriculaAlunoModel matriculaAlunoModel = new MatriculaAlunoModel();
+                    matriculaAlunoModel.setNroMatricula(rs.getInt("nroMatricula"));
+                    matriculaAlunoModel.setDtMatricula(rs.getDate("dtMatricula").toLocalDate());
+                    matriculaAlunoModel.setStatusMatricula(rs.getBoolean("statusMatricula"));
+
+                    AlunoDAO alunoDAO = new AlunoDAO();
+                    AlunoModel alunoModel = alunoDAO.selectById(idAluno);
+                    matriculaAlunoModel.setAlunoModel(alunoModel);
+
+                    int idCurso = rs.getInt("idCurso");
+                    CursoDAO cursoDAO = new CursoDAO();
+                    CursoModel cursoModel = cursoDAO.selectById(idCurso);
+                    matriculaAlunoModel.setCursoModel(cursoModel);
+
+                    int idAnoLetivo = this.selectAnoLetivoByNroMatricula(matriculaAlunoModel.getNroMatricula());
+                    AnoLetivoDAO anoLetivoDAO = new AnoLetivoDAO();
+                    AnoLetivoModel anoLetivoModel = anoLetivoDAO.selectById(idAnoLetivo);
+                    matriculaAlunoModel.setAnoLetivoModel(anoLetivoModel);
+
+                    matriculaAlunoModel.setDisciplinas(this.selectDisciplinasByNroMatricula(matriculaAlunoModel.getNroMatricula()));
+
+                    matriculas.add(matriculaAlunoModel);
+                }
+            }
+        } catch (SQLException e) {
+            throw new SelectSqlException("Erro ao realizar select na tabela MatriculaAluno: " + e.getMessage(), e);
+        }
+        return matriculas;
+    }
+
     public List<Integer> selectDisciplinasCursadasPorAluno(int idAluno) throws SelectSqlException {
         String query = "SELECT idDisciplina FROM MatriculaAluno_Disciplina d " +
                 "JOIN MatriculaAluno m ON d.nroMatricula = m.nroMatricula " +
@@ -220,4 +261,5 @@ public class MatriculaAlunoDAO {
         }
         return maxMatricula + 1;
     }
+
 }

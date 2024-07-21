@@ -110,4 +110,63 @@ public class MatriculaAlunoView {
             System.out.println("Cadastro de aluno não encontrado com esse CPF, realize o cadastro no menu principal");
         }
     }
+
+    public void exibirMatriculaAluno() {
+        System.out.println("Exibir matrícula de aluno: \n");
+
+        System.out.print("Digite o CPF do aluno: ");
+        String cpfAluno = scanner.nextLine();
+        AlunoModel alunoModel = null;
+        try {
+            alunoModel = alunoController.buscarPorCpf(cpfAluno);
+        } catch (SelectSqlException e) {
+            System.out.println("Erro ao buscar aluno: " + e.getMessage());
+            return;
+        }
+
+        if (alunoModel != null) {
+            try {
+                List<MatriculaAlunoModel> matriculasAluno = matriculaAlunoController.buscarMatriculasPorAluno(alunoModel.getIdAluno());
+
+                if (matriculasAluno != null && !matriculasAluno.isEmpty()) {
+                    System.out.println("Nome do Aluno: " + alunoModel.getNomeAluno());
+                    System.out.println("CPF: " + alunoModel.getCpfAluno());
+                    System.out.println("Telefone: " + alunoModel.getTelefoneAluno());
+                    System.out.println("e-mail: " + alunoModel.getEmailAluno());
+                    System.out.println("Nome do Curso: " + matriculasAluno.get(0).getCursoModel().getNomeCurso());
+
+                    for (MatriculaAlunoModel matriculaAlunoModel : matriculasAluno) {
+                        System.out.println("\nAno Letivo: " + matriculaAlunoModel.getAnoLetivoModel().getAnoLetivo());
+
+                        System.out.println("Data da Matrícula: " + matriculaAlunoModel.getDtMatricula());
+
+                        System.out.println("\nDisciplinas a Cursar:");
+                        List<DisciplinaModel> disciplinasModel = disciplinaController.buscarPorCursoEAnoLetivo(
+                                matriculaAlunoModel.getCursoModel().getIdCurso(),
+                                matriculaAlunoModel.getAnoLetivoModel().getAnoLetivo()
+                        );
+
+                        for (DisciplinaModel disciplina : disciplinasModel) {
+                            if (matriculaAlunoModel.getDisciplinas().contains(disciplina.getIdDisciplina())) {
+                                System.out.println("Nome Disciplina: " + disciplina.getNomeDisciplina());
+
+                                List<ProfessorModel> professores = disciplinaController.buscarProfessoresPorDisciplina(disciplina.getIdDisciplina());
+                                for (ProfessorModel professor : professores) {
+                                    System.out.println("Nome Professor: " + professor.getNomeProfessor());
+                                    System.out.println("e-mail Professor: " + professor.getEmailProfessor());
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("Matrícula não encontrada.");
+                }
+            } catch (SelectSqlException e) {
+                System.out.println("Erro ao buscar matrícula: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Aluno não encontrado com esse CPF.");
+        }
+    }
 }
+
