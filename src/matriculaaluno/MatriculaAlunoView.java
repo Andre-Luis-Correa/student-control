@@ -153,7 +153,7 @@ public class MatriculaAlunoView {
                                 List<ProfessorModel> professores = disciplinaController.buscarProfessoresPorDisciplina(disciplina.getIdDisciplina());
                                 for (ProfessorModel professor : professores) {
                                     System.out.println("Nome Professor: " + professor.getNomeProfessor());
-                                    System.out.println("e-mail Professor: " + professor.getEmailProfessor());
+                                    System.out.println("e-mail Professor: " + professor.getEmailProfessor() + "\n");
                                 }
                             }
                         }
