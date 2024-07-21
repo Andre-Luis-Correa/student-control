@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UnidadeFederacaoDAO {
 
@@ -54,5 +56,26 @@ public class UnidadeFederacaoDAO {
         }
 
         return unidadeFederacao;
+    }
+
+    public List<UnidadeFederacaoModel> selectAll() throws SelectSqlException {
+        String query = "SELECT * FROM unidadefederacao";
+        List<UnidadeFederacaoModel> unidadesFederativas = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                UnidadeFederacaoModel unidadeFederacao = new UnidadeFederacaoModel();
+                unidadeFederacao.setSiglaUF(rs.getString("siglauf"));
+                unidadeFederacao.setNomeUF(rs.getString("nomeuf"));
+                unidadesFederativas.add(unidadeFederacao);
+            }
+        } catch (SQLException e) {
+            throw new SelectSqlException("Erro ao realizar select na tabela unidadefederacao", e);
+        }
+
+        return unidadesFederativas;
     }
 }

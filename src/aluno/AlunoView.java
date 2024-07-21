@@ -20,13 +20,15 @@ public class AlunoView {
     }
 
     public void cadastrarAluno() throws SelectSqlException {
-        System.out.println("Cadastrar aluno:\n");
+        System.out.println("\nCadastrar aluno:\n");
+        System.out.println("Dados pessoas:");
         System.out.print("Digite o CPF do aluno: ");
         String cpfAluno = scanner.nextLine();
 
         if (alunoController.buscarPorCpf(cpfAluno) == null) {
             AlunoModel alunoModel = lerAluno();
             alunoModel.setCpfAluno(cpfAluno);
+            System.out.println("\nDados do endereço:");
             EnderecoModel enderecoModel = enderecoView.lerEndereco();
             alunoModel.setEnderecoModel(enderecoModel);
             try {

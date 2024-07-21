@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TipoLogradouroDAO {
 
@@ -53,6 +55,50 @@ public class TipoLogradouroDAO {
                     tipoLogradouro = new TipoLogradouroModel();
                     tipoLogradouro.setSiglaTipoLogradouro(rs.getString("siglaTipoLogradouro"));
                     tipoLogradouro.setNomeTipoLogradouro(rs.getString("nomeTipoLogradouro"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new SelectSqlException("Erro ao realizar select na tabela tipologradouro", e);
+        }
+
+        return tipoLogradouro;
+    }
+
+    public List<TipoLogradouroModel> selectAll() throws SelectSqlException {
+        String query = "SELECT * FROM tipologradouro";
+        List<TipoLogradouroModel> tiposLogradouro = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                TipoLogradouroModel tipoLogradouro = new TipoLogradouroModel();
+                tipoLogradouro.setSiglaTipoLogradouro(rs.getString("siglatipologradouro"));
+                tipoLogradouro.setNomeTipoLogradouro(rs.getString("nometipologradouro"));
+                tiposLogradouro.add(tipoLogradouro);
+            }
+        } catch (SQLException e) {
+            throw new SelectSqlException("Erro ao realizar select na tabela tipologradouro", e);
+        }
+
+        return tiposLogradouro;
+    }
+
+    public TipoLogradouroModel selectBySigla(String sigla) throws SelectSqlException {
+        String query = "SELECT * FROM tipologradouro WHERE siglatipologradouro = ?";
+        TipoLogradouroModel tipoLogradouro = null;
+
+        try (Connection conn = DatabaseConnection.GetConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, sigla);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    tipoLogradouro = new TipoLogradouroModel();
+                    tipoLogradouro.setSiglaTipoLogradouro(rs.getString("siglatipologradouro"));
+                    tipoLogradouro.setNomeTipoLogradouro(rs.getString("nometipologradouro"));
                 }
             }
         } catch (SQLException e) {

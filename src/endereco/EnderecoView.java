@@ -4,6 +4,7 @@ import bairro.BairroModel;
 import bairro.BairroView;
 import cidade.CidadeModel;
 import cidade.CidadeView;
+import exceptions.SelectSqlException;
 import logradouro.LogradouroModel;
 import logradouro.LogradouroView;
 
@@ -22,7 +23,7 @@ public class EnderecoView {
         this.bairroView = new BairroView();
     }
 
-    public EnderecoModel lerEndereco() {
+    public EnderecoModel lerEndereco() throws SelectSqlException {
         EnderecoModel enderecoModel = new EnderecoModel();
 
         LogradouroModel logradouroModel = logradouroView.lerLogradouro();

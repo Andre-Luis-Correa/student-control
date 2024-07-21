@@ -27,7 +27,7 @@ public class EnderecoController {
 
     public int cadastrarEndereco(EnderecoModel endereco) throws InsertSqlException, SelectSqlException {
         // Inserir Unidade Federativa
-        String siglaUF = unidadeFederacaoController.cadastrarUnidadeFederacao(endereco.getCidadeModel().getUnidadeFederacaoModel());
+        String siglaUF = endereco.getCidadeModel().getUnidadeFederacaoModel().getSiglaUF();
         endereco.getCidadeModel().getUnidadeFederacaoModel().setSiglaUF(siglaUF);
 
         // Inserir Cidade
@@ -39,7 +39,7 @@ public class EnderecoController {
         endereco.getBairroModel().setIdBairro(idBairro);
 
         // Inserir Tipo de Logradouro
-        String siglaTipoLogradouro = tipoLogradouroController.cadastrarTipoLogradouro(endereco.getLogradouroModel().getTipoLogradouroModel());
+        String siglaTipoLogradouro = endereco.getLogradouroModel().getTipoLogradouroModel().getSiglaTipoLogradouro();
         endereco.getLogradouroModel().getTipoLogradouroModel().setSiglaTipoLogradouro(siglaTipoLogradouro);
 
         // Inserir Logradouro

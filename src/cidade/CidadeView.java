@@ -1,5 +1,6 @@
 package cidade;
 
+import exceptions.SelectSqlException;
 import unidadefederacao.UnidadeFederacaoModel;
 import unidadefederacao.UnidadeFederacaoView;
 
@@ -15,10 +16,10 @@ public class CidadeView {
         this.unidadeFederacaoView = new UnidadeFederacaoView();
     }
 
-    public CidadeModel lerCidade() {
+    public CidadeModel lerCidade() throws SelectSqlException {
         CidadeModel cidadeModel = new CidadeModel();
 
-        System.out.print("Nome da Cidade: ");
+        System.out.print("\nNome da Cidade: ");
         cidadeModel.setNomeCidade(scanner.nextLine());
 
         UnidadeFederacaoModel unidadeFederacaoModel = unidadeFederacaoView.lerUnidadeFederacao();

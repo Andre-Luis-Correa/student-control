@@ -13,7 +13,7 @@ public class BairroView {
     public BairroModel lerBairro() {
         BairroModel bairroModel = new BairroModel();
 
-        System.out.print("Nome do Bairro: ");
+        System.out.print("\nNome do Bairro: ");
         bairroModel.setNomeBairro(scanner.nextLine());
 
         return bairroModel;
