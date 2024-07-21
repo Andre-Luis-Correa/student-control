@@ -11,7 +11,7 @@ public class DatabaseConnection {
     //Colocar o usuario que loga no MySQL Workbench
     private static final String USER = "root";
     //Colocar a senha que loga no MySQL Workbench
-    private static final String PASSWORD = "trovaoA123?";
+    private static final String PASSWORD = "WUw2qHkj78";
 
     static {
         try {
